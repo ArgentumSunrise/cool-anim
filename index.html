@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='author' content="Colter Giem">
+    <meta name='description' content='A cool animation'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name='robots' content='all'>
+    <title>Cool Animation</title>
+</head>
+
+<body>
+    <div id='container'>
+        <svg id="svg7728" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="701.5" width="323.18" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="0 0 323.17801 701.50099">
+            <metadata id="metadata7733">
+                <rdf:RDF>
+                    <cc:Work rdf:about="">
+                        <dc:format>image/svg+xml</dc:format>
+                        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                        <dc:title/>
+                    </cc:Work>
+                </rdf:RDF>
+            </metadata>
+            <g id="layer1" transform="translate(0 -350.86)" stroke="#c0392b" stroke-linecap="round" stroke-width="3" fill="none">
+                <path id="path0" stroke-linejoin="round" d="m241.07 547.27c5.3671-2.9728 6.1879-3.5228 10.982-7.3235 19.178-15.203 33.364-36.703 39.268-61.893 11.808-50.38-12.62-102.26-59.089-125.7l-0.11349 108.84-52.74 29.996-52.74-29.996-0.11349-108.84c-46.469 23.438-70.897 75.317-59.089 125.7 5.9039 25.19 20.09 46.69 39.268 61.893 9.589 7.6014 22.212 14.7 34.994 19.053l-0.67745 198.66-0.15496 0.58295c0 33.949-23.225 63.492-56.215 71.506-32.99 8.0141-67.181-7.581-83.146-38.251l30.42-16.666 0.62272 0.0156c6.3865 16.671 23.336 26.729 40.717 23.807 17.381-2.9224 30.11-17.97 30.11-35.595l0.14658-0.75705v-195.62" />
+                <path id="path1" stroke-linejoin="round" d="m139.49 816.58-0.34608 28.567c-12.02 4.4989-22.857 10.526-32.446 18.127-19.178 15.203-33.364 36.703-39.268 61.893-11.808 50.38 12.62 102.26 59.089 125.7l0.11349-108.84 52.74-29.996 52.74 29.996 0.11349 108.84c46.469-23.438 70.7-75.271 59.089-125.7-9.4598-41.083-38.367-69.443-73.154-79.648 0 0-0.37661-17.451-0.37661-20.46 19.197 10.481 52.411 7.3084 69.536-3.4161 20.804-13.589 33.639-38.547 33.345-63.394-1.0216-86.321-101.08-72.39-102-119.62-0.43941-22.614 13.73-33.74 31.931-35.854 18.201-2.1137 35.098 9.7459 39.298 27.582 0 0 27.744-13.067 31.781-14.149l-0.56415-1.8355c-8.1195-29.434-40.521-50.976-76.768-45.793-36.248 5.1834-63.174 34.887-63.111 74.257 0.0505 71.107 101.84 59.717 101.89 116.23 0.0493 17.33-11.628 31.946-28.076 35.67-16.448 3.7234-34.039-6.2064-41.645-21.05l-30.343 22.519" />
+                <path id='path'></path>
+                <path class='circ' id="circ0" d="m177.35 538.42c-6.7063 0-12.143-5.4365-12.143-12.143 0-6.7063 5.4365-12.143 12.143-12.143 6.7063 0 12.143 5.4365 12.143 12.143" />
+                <path class='circ' id="circ1" d="m189.49 876.95c0-6.7063-5.4365-12.143-12.143-12.143-6.7063 0-12.143 5.4365-12.143 12.143 0 6.7063 5.4366 12.143 12.143 12.143" />
+            </g>
+        </svg>
+    </div>
+    <style>
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            line-height: 1.6;
+            overflow-y: scroll;
+            overflow-x: hidden;
+        }
+        
+        #container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+        }
+        
+        svg {
+            max-height: 50%;
+            margin: auto;
+        }
+        
+        .circ {
+            display: none;
+        }
+    </style>
+    <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var allpaths = document.querySelectorAll('*[id^="path"]'),
+                circs = document.querySelectorAll('*[id^="circ"]'),
+                lengths = new Array();
+
+            prepPaths(allpaths);
+            prepPaths(circs);
+            draw(allpaths, "3");
+            setTimeout(function () {
+                $('.circ').fadeIn(100)
+            }, 1900);
+            setTimeout(function () {
+                draw(circs, "1");
+            }, 2000);
+
+            function prepPaths(paths) {
+                lengths = [];
+                for (var i = 0; i < paths.length; i++) {
+                    l = paths[i].getTotalLength();
+                    lengths[i] = l;
+                    paths[i].style.strokeDasharray = paths[i].getTotalLength() + ' ' + paths[i].getTotalLength();
+                    paths[i].style.strokeDashoffset = paths[i].getTotalLength();
+                    paths[i].style.transition = paths[i].style.WebkitTransition =
+                        'none';
+                }
+            }
+
+            function draw(paths, time) {
+                for (var j = 0; j < paths.length; j++) {
+                    paths[j].style.transition = paths[j].style.WebkitTransition =
+                        'stroke-dashoffset ' + time + 's ease-in-out';
+                    paths[j].style.strokeDashoffset = '0';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
