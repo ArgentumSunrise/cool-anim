@@ -62,19 +62,29 @@
     <script type='text/javascript' src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
     <script>
         $(document).ready(function () {
-            var allpaths = document.querySelectorAll('*[id^="path"]'),
+            var paths = document.querySelectorAll('*[id^="path"]'),
                 circs = document.querySelectorAll('*[id^="circ"]'),
                 lengths = new Array();
 
-            prepPaths(allpaths);
+            prepPaths(paths);
             prepPaths(circs);
-            draw(allpaths, "3");
-            setTimeout(function () {
-                $('.circ').fadeIn(100)
-            }, 1900);
-            setTimeout(function () {
-                draw(circs, "1");
-            }, 2000);
+
+            function drawAll() {
+                draw(paths, "3");
+                setTimeout(function () {
+                    $('.circ').fadeIn(100)
+                }, 1900);
+                setTimeout(function () {
+                    draw(circs, "1");
+                }, 2000);
+                setTimeout(function () {
+                    undraw(paths, "3");
+                    undraw(circs, "1");
+
+                }, 3000);
+            }
+            drawAll();
+            setInterval(drawAll, 6000);
 
             function prepPaths(paths) {
                 lengths = [];
@@ -93,6 +103,12 @@
                     paths[j].style.transition = paths[j].style.WebkitTransition =
                         'stroke-dashoffset ' + time + 's ease-in-out';
                     paths[j].style.strokeDashoffset = '0';
+                }
+            }
+
+            function undraw(paths, time) {
+                for (var j = 0; j < paths.length; j++) {
+                    paths[j].style.strokeDashoffset = paths[j].getTotalLength();
                 }
             }
         });
